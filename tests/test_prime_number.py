@@ -3,11 +3,11 @@ from prime_number import __appname__, __version__, cli, prime_number as prime
 
 runner = CliRunner()
 
-### unit tests for prime number functionality ###
+# unit tests for prime number functionality ###
+
+
 # test the prime number generator (sieve of eratosthenes) for all
 # numbers between 2 and 100
-
-
 def test_sieve_of_eratosthenes():
     prime_cantidates = prime.sieve_of_eratosthenes(100)
     prime_count = filter(lambda x: x is True, prime_cantidates)
@@ -19,7 +19,9 @@ def test_sieve_of_eratosthenes():
     assert prime_cantidates[2] is True
     # check that we got the expected prime numbers
     assert prime.bool_array_to_prime_array(prime_cantidates) == [
-        2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97]
+        2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61,
+        67, 71, 73, 79, 83, 89, 97
+    ]
 
 # TODO test if 7 is prime
 
@@ -43,7 +45,7 @@ def test_sieve_of_eratosthenes():
 
 # TODO test range [7900-7920] for prime numbers
 
-### integration tests for calling the cli with various arguments ###
+# integration tests for calling the cli with various arguments ###
 # test calling the cli with no arguments
 
 
