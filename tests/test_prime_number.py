@@ -89,6 +89,16 @@ def test_prime_numbers_between_inverted():
     ]
 
 
+# test range where both bounds are the same [7-7] prime number
+def test_prime_numbers_between_same_prime():
+    assert prime.prime_numbers_between(lower_bound=7, upper_bound=7) == [7]
+
+
+# test range where both bounds are the same [4-4] non-prime number
+def test_prime_numbers_between_same_not_prime():
+    assert prime.prime_numbers_between(lower_bound=4, upper_bound=4) == []
+
+
 # test range [7900-7920] for prime numbers
 def test_prime_numbers_between_7900_7920():
     assert prime.prime_numbers_between(lower_bound=7900, upper_bound=7920) == [
