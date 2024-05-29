@@ -1,10 +1,21 @@
 from typer.testing import CliRunner
-from prime_number import __appname__, __version__, cli
+from prime_number import __appname__, __version__, cli, prime_number as prime
 
 runner = CliRunner()
 
-# unit tests for prime number functionality
-# TODO test the prime number generator for all numbers between 2 and 100
+### unit tests for prime number functionality ###
+# test the prime number generator (sieve of eratosthenes) for all numbers between 2 and 100
+def test_sieve_of_eratosthenes():
+    prime_cantidates = prime.sieve_of_eratosthenes(100)
+    prime_count = filter(lambda x: x == True, prime_cantidates)
+    # check that we have 25 prime numbers between 2 and 100
+    assert len(list(prime_count)) == 25
+    # check that known numbers are correct
+    assert prime_cantidates[0] == False
+    assert prime_cantidates[1] == False
+    assert prime_cantidates[2] == True
+    # check that we got the expected prime numbers
+    assert prime.bool_array_to_prime_array(prime_cantidates) == [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97]
 
 # TODO test if 7 is prime
 
@@ -28,8 +39,7 @@ runner = CliRunner()
 
 # TODO test range [7900-7920] for prime numbers
 
-### integration tests for calling the cli with various arguments
-
+### integration tests for calling the cli with various arguments ###
 # test calling the cli with no arguments
 def test_no_args():
     result = runner.invoke(cli.app, [])
