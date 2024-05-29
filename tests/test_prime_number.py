@@ -1,3 +1,8 @@
+from typer.testing import CliRunner
+from prime_number import __appname__, __version__, cli
+
+runner = CliRunner()
+
 # unit tests for prime number functionality
 # TODO test the prime number generator for all numbers between 2 and 100
 
@@ -23,10 +28,18 @@
 
 # TODO test range [7900-7920] for prime numbers
 
-# integration tests for calling the cli with various arguments
-# TODO test calling the cli with no arguments
+### integration tests for calling the cli with various arguments
 
-# TODO test calling the cli with the --version flag
+# test calling the cli with no arguments
+def test_no_args():
+    result = runner.invoke(cli.app, [])
+    assert result.exit_code == 2
+
+# test calling the cli with the --version flag
+def test_version():
+    result = runner.invoke(cli.app, ["--version"])
+    assert result.exit_code == 0
+    assert result.stdout == f"{__appname__} version {__version__}\n"
 
 # TODO test calling the cli with the --lessthan flag
 

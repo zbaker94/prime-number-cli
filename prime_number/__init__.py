@@ -9,7 +9,7 @@ __version__ = "0.1.0"
     DIR_CREATE_ERROR,
     FILE_WRITE_ERROR,
     PARSE_ERROR,
-) = range(4)
+) = range(7)
 
 ERRORS = {
     SUCCESS: "Success",
