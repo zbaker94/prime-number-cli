@@ -1,4 +1,4 @@
-# TODO implementation of the sieve of eratosthenes algorithm to generate a list of prime numbers between 2 and a given number inclusive
+# implementation of the sieve of eratosthenes algorithm to generate a list of prime numbers between 2 and a given number inclusive
 def sieve_of_eratosthenes(upper_range: int) -> list[int]:
     """Generate a list of prime numbers between 2 and a given number inclusive."""
     # create a boolean array from 0 to n and initialize all elements as True
@@ -17,7 +17,7 @@ def sieve_of_eratosthenes(upper_range: int) -> list[int]:
         prime += 1
     return prime_cantidates
 
-# TODO function to coervce an array of booleans to an array of prime numbers (true is prime, false is not prime)
+# function to coervce an array of booleans to an array of prime numbers (true is prime, false is not prime)
 def bool_array_to_prime_array(prime_cantidates: list[bool]) -> list[int]:
     """Coerce an array of booleans to an array of prime numbers."""
     prime_numbers = []
