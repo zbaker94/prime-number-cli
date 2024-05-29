@@ -127,13 +127,25 @@ def test_lessthan():
     assert result.stdout == "Finding all prime numbers less than or equal to 100...\nPrime numbers less than or equal to 100:  [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97]\n"
 
 
-# test calling the cli with the prime_generator param
+# test calling the cli with the prime-generator param
 def test_prime_generator():
     result = runner.invoke(cli.app, ["prime-generator", "2", "100"])
     assert result.exit_code == 0
     assert result.stdout == "Finding all prime numbers between 2 and 100...\nPrime numbers between 2 and 100:  [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97]\n"
 
-# TODO test calling the cli with the --check and --number flags
+
+# test calling the cli with the is-prime param with a prime number
+def test_is_prime_true():
+    result = runner.invoke(cli.app, ["is-prime", "7"])
+    assert result.exit_code == 0
+    assert result.stdout == "7 is a prime number.\n"
+
+
+# test calling the cli with the is-prime param with a non-prime number
+def test_is_prime_false():
+    result = runner.invoke(cli.app, ["is-prime", "9"])
+    assert result.exit_code == 0
+    assert result.stdout == "9 is not a prime number.\n"
 
 # TODO test calling the cli with the --check and --list flags
 

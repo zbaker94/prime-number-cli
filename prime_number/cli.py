@@ -65,10 +65,29 @@ def prime_generator(
     )
 
 
+# command to check if a single number is prime
 @app.command()
-# TODO command to check if a single number is prime
+def is_prime(
+    number: int = typer.Argument(
+        2,
+        help="The number to check if it is prime.",
+    )
+):
+    """Check if a single number is prime."""
+    if prime.is_prime(number):
+        typer.echo(
+            Fore.GREEN +
+            f"{number} is a prime number."
+        )
+    else:
+        typer.echo(
+            Fore.RED +
+            f"{number} is not a prime number."
+        )
 # TODO command to check if a list of numbers are prime
 # main app callback for version
+
+
 @app.callback()
 def main(
     version: Optional[bool] = typer.Option(
