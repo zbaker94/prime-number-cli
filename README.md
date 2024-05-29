@@ -1,5 +1,5 @@
-## Prime Number Command Line Interface
+# Prime Number Command Line Interface
 
-#### Description
+### Description
 
 ### How to use
