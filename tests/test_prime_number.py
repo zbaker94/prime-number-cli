@@ -110,19 +110,23 @@ def test_version():
     assert result.stdout == f"{__appname__} version {__version__}\n"
 
 
-# test calling the cli with the --lessthan param
+# test calling the cli with the lessthan param
 def test_lessthan():
     result = runner.invoke(cli.app, ["lessthan", "100"])
     assert result.exit_code == 0
     assert result.stdout == "Finding all prime numbers less than or equal to 100...\nPrime numbers less than or equal to 100:  [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97]\n"
 
-# TODO test calling the cli with the --range flag
+
+# test calling the cli with the prime_generator param
+def test_prime_generator():
+    result = runner.invoke(cli.app, ["prime-generator", "2", "100"])
+    assert result.exit_code == 0
+    assert result.stdout == "Finding all prime numbers between 2 and 100...\nPrime numbers between 2 and 100:  [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97]\n"
 
 # TODO test calling the cli with the --check and --number flags
 
 # TODO test calling the cli with the --check and --list flags
 
-# TODO test calling the cli with the --help flag?
 
 # Filesystem Tests if we get there
 

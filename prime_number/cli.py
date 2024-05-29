@@ -40,7 +40,29 @@ def lessthan(
         f"Prime numbers less than or equal to {number}: {Fore.GREEN} {prime_numbers}"
     )
 
+
 # TODO command to return a list of prime numbers between two given numbers (inclusive)
+@app.command()
+def prime_generator(
+    lower_bound: int = typer.Argument(
+        2,
+        help="The lower bound of the range to find prime numbers between.",
+    ),
+    upper_bound: int = typer.Argument(
+        3,
+        help="The upper bound of the range to find prime numbers between.",
+    )
+):
+    """Return a list of prime numbers between two given numbers (inclusive)."""
+    typer.echo(
+        Fore.YELLOW +
+        f"Finding all prime numbers between {min(lower_bound, upper_bound)} and {max(upper_bound, lower_bound)}...")
+    prime_numbers = prime.prime_numbers_between(
+        lower_bound=lower_bound, upper_bound=upper_bound)
+    typer.echo(
+        Fore.LIGHTMAGENTA_EX +
+        f"Prime numbers between {lower_bound} and {upper_bound}: {Fore.GREEN} {prime_numbers}"
+    )
 
 
 @app.command()

@@ -12,4 +12,6 @@
 #### Usage Examples
 ##### Get all of the prime numbers from 2 to 10
 `python -m prime_number lessthan 10`
+##### Gett all of the prime numbers between 10 and 1000
+`python -m prime_number prime-generator 10 1000`
 
