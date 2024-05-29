@@ -30,9 +30,19 @@ def bool_array_to_prime_array(prime_cantidates: list[bool]) -> list[int]:
             prime_numbers.append(p)
     return prime_numbers
 
-# TODO function to generate a list of prime numbers between two given numbers (default 2 for lower bound) inclusive ignoring the cached list
 
-# TODO function to check if a number is prime
+# function to check if a number is prime
+def is_prime(number: int) -> bool:
+    """Check if a number is prime."""
+    if number < 2:
+        return False
+    prime_cantidates = sieve_of_eratosthenes(number)
+    prime_numbers = bool_array_to_prime_array(prime_cantidates)
+    if number in prime_numbers:
+        return True
+    return False
+
+# TODO function to generate a list of prime numbers between two given numbers (default 2 for lower bound) inclusive ignoring the cached list
 
 
 # cache file functions if we get there ###

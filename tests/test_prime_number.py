@@ -23,13 +23,25 @@ def test_sieve_of_eratosthenes():
         67, 71, 73, 79, 83, 89, 97
     ]
 
-# TODO test if 7 is prime
 
-# TODO test if 9 is not prime
+# test if 7 is prime
+def test_is_prime_7():
+    assert prime.is_prime(7) is True
 
-# TODO test if 1 is prime
 
-# TODO test if 0 is prime
+# test if 9 is not prime
+def test_is_prime_9():
+    assert prime.is_prime(9) is False
+
+
+# test if 1 is prime
+def test_is_prime_1():
+    assert prime.is_prime(1) is False
+
+
+# test if 0 is prime
+def test_is_prime_0():
+    assert prime.is_prime(0) is False
 
 # TODO test a list of numbers to see if they are prime (all prime)
 
