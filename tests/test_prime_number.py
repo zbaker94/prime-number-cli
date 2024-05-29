@@ -95,23 +95,26 @@ def test_prime_numbers_between_7900_7920():
         7901, 7907, 7919
     ]
 
+
 # integration tests for calling the cli with various arguments ###
 # test calling the cli with no arguments
-
-
 def test_no_args():
     result = runner.invoke(cli.app, [])
     assert result.exit_code == 2
 
+
 # test calling the cli with the --version flag
-
-
 def test_version():
     result = runner.invoke(cli.app, ["--version"])
     assert result.exit_code == 0
     assert result.stdout == f"{__appname__} version {__version__}\n"
 
-# TODO test calling the cli with the --lessthan flag
+
+# test calling the cli with the --lessthan param
+def test_lessthan():
+    result = runner.invoke(cli.app, ["lessthan", "100"])
+    assert result.exit_code == 0
+    assert result.stdout == "Finding all prime numbers less than or equal to 100...\nPrime numbers less than or equal to 100:  [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97]\n"
 
 # TODO test calling the cli with the --range flag
 

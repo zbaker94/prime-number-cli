@@ -8,11 +8,11 @@ def sieve_of_eratosthenes(upper_range: int) -> list[int]:
     # track current prime number starting with first known prime number
     prime = 2
     # loop through the numbers from 2 to the square root of n
-    while prime * prime <= upper_range:
+    while pow(prime, 2) <= upper_range:
         # check if we have marked current number as prime
         if prime_cantidates[prime] is True:
             # mark all multiples of prime as not prime
-            for i in range(prime * prime, upper_range + 1, prime):
+            for i in range(pow(prime, 2), upper_range + 1, prime):
                 prime_cantidates[i] = False
         # move to the next number
         prime += 1
