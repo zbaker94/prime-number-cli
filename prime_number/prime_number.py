@@ -55,9 +55,15 @@ def is_prime_list(list_of_numbers: list[int]) -> list[{int, bool}]:
 # numbers (default 2 for lower bound) inclusive
 def prime_numbers_between(upper_bound: int, lower_bound: int = 2) -> list[int]:
     """Generate a list of prime numbers between two given numbers."""
+    min_bound = min(lower_bound, upper_bound)
     prime_cantidates = sieve_of_eratosthenes(max(upper_bound, lower_bound))
     prime_numbers = bool_array_to_prime_array(prime_cantidates)
-    return prime_numbers[prime_numbers.index(min(lower_bound, upper_bound)):]
+
+    # get the first index that is greater than or equal to the lower bound
+    index_of_lower_bound = next(
+        (i for i, n in enumerate(prime_numbers) if n >= min_bound), None)
+
+    return prime_numbers[index_of_lower_bound:]
 
 # cache file functions if we get there ###
 
