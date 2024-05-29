@@ -4,18 +4,22 @@ from prime_number import __appname__, __version__, cli, prime_number as prime
 runner = CliRunner()
 
 ### unit tests for prime number functionality ###
-# test the prime number generator (sieve of eratosthenes) for all numbers between 2 and 100
+# test the prime number generator (sieve of eratosthenes) for all
+# numbers between 2 and 100
+
+
 def test_sieve_of_eratosthenes():
     prime_cantidates = prime.sieve_of_eratosthenes(100)
-    prime_count = filter(lambda x: x == True, prime_cantidates)
+    prime_count = filter(lambda x: x is True, prime_cantidates)
     # check that we have 25 prime numbers between 2 and 100
     assert len(list(prime_count)) == 25
     # check that known numbers are correct
-    assert prime_cantidates[0] == False
-    assert prime_cantidates[1] == False
-    assert prime_cantidates[2] == True
+    assert prime_cantidates[0] is False
+    assert prime_cantidates[1] is False
+    assert prime_cantidates[2] is True
     # check that we got the expected prime numbers
-    assert prime.bool_array_to_prime_array(prime_cantidates) == [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97]
+    assert prime.bool_array_to_prime_array(prime_cantidates) == [
+        2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97]
 
 # TODO test if 7 is prime
 
@@ -41,11 +45,15 @@ def test_sieve_of_eratosthenes():
 
 ### integration tests for calling the cli with various arguments ###
 # test calling the cli with no arguments
+
+
 def test_no_args():
     result = runner.invoke(cli.app, [])
     assert result.exit_code == 2
 
 # test calling the cli with the --version flag
+
+
 def test_version():
     result = runner.invoke(cli.app, ["--version"])
     assert result.exit_code == 0
@@ -61,7 +69,7 @@ def test_version():
 
 # TODO test calling the cli with the --help flag?
 
-### Filesystem Tests if we get there
+# Filesystem Tests if we get there
 
 # TODO test reading and writing cache file
 

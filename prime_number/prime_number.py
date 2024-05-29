@@ -17,7 +17,9 @@ def sieve_of_eratosthenes(upper_range: int) -> list[int]:
         prime += 1
     return prime_cantidates
 
-# function to coervce an array of booleans to an array of prime numbers (true is prime, false is not prime)
+
+# function to coervce an array of booleans to an array of prime numbers 
+# (true is prime, false is not prime)
 def bool_array_to_prime_array(prime_cantidates: list[bool]) -> list[int]:
     """Coerce an array of booleans to an array of prime numbers."""
     prime_numbers = []
@@ -32,6 +34,6 @@ def bool_array_to_prime_array(prime_cantidates: list[bool]) -> list[int]:
 # TODO function to check if a number is prime
 
 
-### cache file functions if we get there
+### cache file functions if we get there ###
 
 # TODO function to generate a list of prime numbers between two given numbers (default 2 for lower bound) inclusive (starting from the last number in the cached list if it exists)

@@ -12,6 +12,7 @@ import typer
 
 app = typer.Typer()
 
+
 ### Callbacks
 def _version_callback(value: bool):
     if value:
