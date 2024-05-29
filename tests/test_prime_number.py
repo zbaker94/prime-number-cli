@@ -89,37 +89,87 @@ def test_prime_numbers_between_inverted():
     ]
 
 
+# test range where both bounds are the same [7-7] prime number
+def test_prime_numbers_between_same_prime():
+    assert prime.prime_numbers_between(lower_bound=7, upper_bound=7) == [7]
+
+
+# test range where both bounds are the same [4-4] non-prime number
+def test_prime_numbers_between_same_not_prime():
+    assert prime.prime_numbers_between(lower_bound=4, upper_bound=4) == []
+
+
 # test range [7900-7920] for prime numbers
 def test_prime_numbers_between_7900_7920():
     assert prime.prime_numbers_between(lower_bound=7900, upper_bound=7920) == [
         7901, 7907, 7919
     ]
 
+
 # integration tests for calling the cli with various arguments ###
 # test calling the cli with no arguments
-
-
 def test_no_args():
     result = runner.invoke(cli.app, [])
     assert result.exit_code == 2
 
+
 # test calling the cli with the --version flag
-
-
 def test_version():
     result = runner.invoke(cli.app, ["--version"])
     assert result.exit_code == 0
     assert result.stdout == f"{__appname__} version {__version__}\n"
 
-# TODO test calling the cli with the --lessthan flag
 
-# TODO test calling the cli with the --range flag
+# test calling the cli with the lessthan param
+def test_lessthan():
+    result = runner.invoke(cli.app, ["lessthan", "100"])
+    assert result.exit_code == 0
+    assert result.stdout == "Finding all prime numbers less than or equal to 100...\nPrime numbers less than or equal to 100:  [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97]\n"
 
-# TODO test calling the cli with the --check and --number flags
 
-# TODO test calling the cli with the --check and --list flags
+# test calling the cli with the prime-generator param
+def test_prime_generator():
+    result = runner.invoke(cli.app, ["prime-generator", "2", "100"])
+    assert result.exit_code == 0
+    assert result.stdout == "Finding all prime numbers between 2 and 100...\nPrime numbers between 2 and 100:  [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97]\n"
 
-# TODO test calling the cli with the --help flag?
+
+# test calling the cli with the is-prime param with a prime number
+def test_is_prime_true():
+    result = runner.invoke(cli.app, ["is-prime", "7"])
+    assert result.exit_code == 0
+    assert result.stdout == "7 is a prime number.\n"
+
+
+# test calling the cli with the is-prime param with a non-prime number
+def test_is_prime_false():
+    result = runner.invoke(cli.app, ["is-prime", "9"])
+    assert result.exit_code == 0
+    assert result.stdout == "9 is not a prime number.\n"
+
+# test calling the cli with the are-prime param with a list of prime numbers
+
+
+def test_are_prime_true():
+    result = runner.invoke(cli.app, ["are-prime", "2", "3", "5", "7"])
+    assert result.exit_code == 0
+    assert result.stdout == "2 is a prime number.\n3 is a prime number.\n5 is a prime number.\n7 is a prime number.\n"
+
+
+# test calling the cli with the are-prime param with a list of non-prime numbers
+def test_are_prime_false():
+    result = runner.invoke(cli.app, ["are-prime", "4", "6", "8", "9"])
+    assert result.exit_code == 0
+    assert result.stdout == "4 is not a prime number.\n6 is not a prime number.\n8 is not a prime number.\n9 is not a prime number.\n"
+
+
+# test calling the cli with the are-prime param with a mixed list of numbers
+def test_are_prime_mixed():
+    result = runner.invoke(
+        cli.app, ["are-prime", "2", "4", "5", "6", "7", "9"])
+    assert result.exit_code == 0
+    assert result.stdout == "2 is a prime number.\n4 is not a prime number.\n5 is a prime number.\n6 is not a prime number.\n7 is a prime number.\n9 is not a prime number.\n"
+
 
 # Filesystem Tests if we get there
 

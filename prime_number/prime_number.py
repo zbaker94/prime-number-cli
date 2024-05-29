@@ -8,11 +8,11 @@ def sieve_of_eratosthenes(upper_range: int) -> list[int]:
     # track current prime number starting with first known prime number
     prime = 2
     # loop through the numbers from 2 to the square root of n
-    while prime * prime <= upper_range:
+    while pow(prime, 2) <= upper_range:
         # check if we have marked current number as prime
         if prime_cantidates[prime] is True:
             # mark all multiples of prime as not prime
-            for i in range(prime * prime, upper_range + 1, prime):
+            for i in range(pow(prime, 2), upper_range + 1, prime):
                 prime_cantidates[i] = False
         # move to the next number
         prime += 1
@@ -55,13 +55,17 @@ def is_prime_list(list_of_numbers: list[int]) -> list[{int, bool}]:
 # numbers (default 2 for lower bound) inclusive
 def prime_numbers_between(upper_bound: int, lower_bound: int = 2) -> list[int]:
     """Generate a list of prime numbers between two given numbers."""
+    if (upper_bound == lower_bound):
+        if is_prime(upper_bound):
+            return [upper_bound]
+        return []
     min_bound = min(lower_bound, upper_bound)
     prime_cantidates = sieve_of_eratosthenes(max(upper_bound, lower_bound))
     prime_numbers = bool_array_to_prime_array(prime_cantidates)
 
     # get the first index that is greater than or equal to the lower bound
     index_of_lower_bound = next(
-        (i for i, n in enumerate(prime_numbers) if n >= min_bound), None)
+        (i for i, n in enumerate(prime_numbers) if n >= min_bound), 0)
 
     return prime_numbers[index_of_lower_bound:]
 
