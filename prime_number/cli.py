@@ -41,7 +41,8 @@ def lessthan(
     )
 
 
-# TODO command to return a list of prime numbers between two given numbers (inclusive)
+# command to return a list of prime numbers between
+# two given numbers (inclusive)
 @app.command()
 def prime_generator(
     lower_bound: int = typer.Argument(
