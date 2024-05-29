@@ -5,7 +5,7 @@ def sieve_of_eratosthenes(upper_range: int) -> list[int]:
     # create a boolean array from 0 to n and initialize all elements as True
     prime_cantidates = [True for _ in range(upper_range + 1)]
     prime_cantidates[0] = prime_cantidates[1] = False
-    # track current prime number
+    # track current prime number starting with first known prime number
     prime = 2
     # loop through the numbers from 2 to the square root of n
     while prime * prime <= upper_range:
