@@ -147,7 +147,28 @@ def test_is_prime_false():
     assert result.exit_code == 0
     assert result.stdout == "9 is not a prime number.\n"
 
-# TODO test calling the cli with the --check and --list flags
+# test calling the cli with the are-prime param with a list of prime numbers
+
+
+def test_are_prime_true():
+    result = runner.invoke(cli.app, ["are-prime", "2", "3", "5", "7"])
+    assert result.exit_code == 0
+    assert result.stdout == "2 is a prime number.\n3 is a prime number.\n5 is a prime number.\n7 is a prime number.\n"
+
+
+# test calling the cli with the are-prime param with a list of non-prime numbers
+def test_are_prime_false():
+    result = runner.invoke(cli.app, ["are-prime", "4", "6", "8", "9"])
+    assert result.exit_code == 0
+    assert result.stdout == "4 is not a prime number.\n6 is not a prime number.\n8 is not a prime number.\n9 is not a prime number.\n"
+
+
+# test calling the cli with the are-prime param with a mixed list of numbers
+def test_are_prime_mixed():
+    result = runner.invoke(
+        cli.app, ["are-prime", "2", "4", "5", "6", "7", "9"])
+    assert result.exit_code == 0
+    assert result.stdout == "2 is a prime number.\n4 is not a prime number.\n5 is a prime number.\n6 is not a prime number.\n7 is a prime number.\n9 is not a prime number.\n"
 
 
 # Filesystem Tests if we get there

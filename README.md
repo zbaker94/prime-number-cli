@@ -16,3 +16,5 @@
 `python -m prime_number prime-generator 10 1000`
 ##### check if 10432 is prime
 `python -m prime_number is-prime 10432`
+##### check if [122, 77, 3, 4] are prime
+`python -m prime_number are-prime 122 77 3 4`

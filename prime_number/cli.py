@@ -84,10 +84,32 @@ def is_prime(
             Fore.RED +
             f"{number} is not a prime number."
         )
-# TODO command to check if a list of numbers are prime
+
+
+# command to check if a list of numbers are prime
+@app.command()
+def are_prime(
+    numbers: list[int] = typer.Argument(
+        help="The list of numbers to check if they are prime.",
+    )
+):
+    """Check if a list of numbers are prime."""
+    prime_list = prime.is_prime_list(numbers)
+    for item in prime_list:
+        for key, value in item.items():
+            if value:
+                typer.echo(
+                    Fore.GREEN +
+                    f"{key} is a prime number."
+                )
+            else:
+                typer.echo(
+                    Fore.RED +
+                    f"{key} is not a prime number."
+                )
+
+
 # main app callback for version
-
-
 @app.callback()
 def main(
     version: Optional[bool] = typer.Option(
