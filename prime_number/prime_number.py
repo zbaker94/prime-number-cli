@@ -32,15 +32,23 @@ def bool_array_to_prime_array(prime_cantidates: list[bool]) -> list[int]:
 
 
 # function to check if a number is prime
-def is_prime(number: int) -> bool:
+def is_prime(number: int, upper_bound=None) -> bool:
     """Check if a number is prime."""
     if number < 2:
         return False
-    prime_cantidates = sieve_of_eratosthenes(number)
+    prime_cantidates = sieve_of_eratosthenes(upper_bound or number)
     prime_numbers = bool_array_to_prime_array(prime_cantidates)
     if number in prime_numbers:
         return True
     return False
+
+
+def is_prime_list(list_of_numbers: list[int]) -> list[{int, bool}]:
+    """Check if a list of numbers are prime."""
+    if (len(list_of_numbers) == 0):
+        return []
+    prime_cantidates = [is_prime(n) for n in list_of_numbers]
+    return [{n: p} for n, p in zip(list_of_numbers, prime_cantidates)]
 
 # TODO function to generate a list of prime numbers between two given numbers (default 2 for lower bound) inclusive ignoring the cached list
 

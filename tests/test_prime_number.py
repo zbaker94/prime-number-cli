@@ -43,13 +43,34 @@ def test_is_prime_1():
 def test_is_prime_0():
     assert prime.is_prime(0) is False
 
-# TODO test a list of numbers to see if they are prime (all prime)
 
-# TODO test a list of numbers to see if they are prime (all not prime)
+# test a list of numbers to see if they are prime (all prime)
+def test_is_prime_list_all_prime():
+    assert prime.is_prime_list([2, 3, 5, 7, 11, 13, 17, 19, 23, 29]) == [
+        {2: True}, {3: True}, {5: True}, {7: True}, {11: True}, {13: True},
+        {17: True}, {19: True}, {23: True}, {29: True}
+    ]
 
-# TODO test a list of numbers to see if they are prime (mixed)
 
-# TODO test a list of numbers to see if they are prime (empty)
+# test a list of numbers to see if they are prime (all not prime)
+def test_is_prime_list_all_not_prime():
+    assert prime.is_prime_list([4, 6, 8, 9, 10, 12, 14, 15, 18, 21]) == [
+        {4: False}, {6: False}, {8: False}, {9: False}, {10: False},
+        {12: False}, {14: False}, {15: False}, {18: False}, {21: False}
+    ]
+
+
+# test a list of numbers to see if they are prime (mixed)
+def test_is_prime_list_mixed():
+    assert prime.is_prime_list([2, 4, 5, 6, 7, 9, 11, 12, 13, 15]) == [
+        {2: True}, {4: False}, {5: True}, {6: False}, {7: True},
+        {9: False}, {11: True}, {12: False}, {13: True}, {15: False}
+    ]
+
+
+# test a list of numbers to see if they are prime (empty)
+def test_is_prime_list_empty():
+    assert prime.is_prime_list([]) == []
 
 # TODO test an arbitrary range [7-82] for prime numbers
 
