@@ -72,11 +72,28 @@ def test_is_prime_list_mixed():
 def test_is_prime_list_empty():
     assert prime.is_prime_list([]) == []
 
-# TODO test an arbitrary range [7-82] for prime numbers
 
-# TODO test an arbitrary inverted range [82-7] for prime numbers
+# test an arbitrary range [7-82] for prime numbers
+def test_prime_numbers_between():
+    assert prime.prime_numbers_between(lower_bound=7, upper_bound=82) == [
+        7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71,
+        73, 79
+    ]
 
-# TODO test range [7900-7920] for prime numbers
+
+# test an arbitrary inverted range [82-7] for prime numbers
+def test_prime_numbers_between_inverted():
+    assert prime.prime_numbers_between(lower_bound=82, upper_bound=7) == [
+        7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71,
+        73, 79
+    ]
+
+
+# test range [7900-7920] for prime numbers
+def test_prime_numbers_between_7900_7920():
+    assert prime.prime_numbers_between(lower_bound=7900, upper_bound=7920) == [
+        7901, 7907, 7919
+    ]
 
 # integration tests for calling the cli with various arguments ###
 # test calling the cli with no arguments

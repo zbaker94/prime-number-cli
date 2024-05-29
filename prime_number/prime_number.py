@@ -50,9 +50,16 @@ def is_prime_list(list_of_numbers: list[int]) -> list[{int, bool}]:
     prime_cantidates = [is_prime(n) for n in list_of_numbers]
     return [{n: p} for n, p in zip(list_of_numbers, prime_cantidates)]
 
-# TODO function to generate a list of prime numbers between two given numbers (default 2 for lower bound) inclusive ignoring the cached list
 
+# function to generate a list of prime numbers between two given
+# numbers (default 2 for lower bound) inclusive
+def prime_numbers_between(upper_bound: int, lower_bound: int = 2) -> list[int]:
+    """Generate a list of prime numbers between two given numbers."""
+    prime_cantidates = sieve_of_eratosthenes(max(upper_bound, lower_bound))
+    prime_numbers = bool_array_to_prime_array(prime_cantidates)
+    return prime_numbers[prime_numbers.index(min(lower_bound, upper_bound)):]
 
 # cache file functions if we get there ###
 
-# TODO function to generate a list of prime numbers between two given numbers (default 2 for lower bound) inclusive (starting from the last number in the cached list if it exists)
+# TODO function to generate a list of prime numbers between two given
+# numbers (default 2 for lower bound) inclusive (starting from the last number in the cached list if it exists)
