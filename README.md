@@ -14,4 +14,5 @@
 `python -m prime_number lessthan 10`
 ##### Gett all of the prime numbers between 10 and 1000
 `python -m prime_number prime-generator 10 1000`
-
+##### check if 10432 is prime
+`python -m prime_number is-prime 10432`
