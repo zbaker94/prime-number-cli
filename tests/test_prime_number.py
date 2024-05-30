@@ -216,6 +216,13 @@ def test_lessthan():
     assert result.stdout == "Finding all prime numbers less than or equal to 100...\nPrime numbers less than or equal to 100:  [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97]\n"
 
 
+# test calling the cli with the prime-generator param with a negative bound
+def test_prime_generator_negative_bound():
+    result = runner.invoke(cli.app, ["prime-generator", "--", "-2", "100"])
+    assert result.exit_code == 0
+    assert result.stdout == "Finding all prime numbers between -2 and 100...\nPrime numbers between -2 and 100:  [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97]\n"
+
+
 # test calling the cli with the prime-generator param
 def test_prime_generator():
     result = runner.invoke(cli.app, ["prime-generator", "2", "100"])
