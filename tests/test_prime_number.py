@@ -108,9 +108,12 @@ def test_prime_numbers_between_7900_7920():
 
 # test range [0, 100] for prime numbers
 def test_zero_lower_range():
-    assert prime.prime_numbers_between(lower_bound=0, upper_bound=100) == [
+    (prime_range, status_code) = prime.prime_numbers_between(
+        lower_bound=0, upper_bound=100)
+    assert prime_range == [
         2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97
     ]
+    assert status_code == SUCCESS
 
 
 # test range [100, 0] for prime numbers
