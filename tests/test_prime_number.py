@@ -1,5 +1,5 @@
 from typer.testing import CliRunner
-from prime_number import __appname__, __version__, cli, prime_number as prime
+from prime_number import __appname__, __version__, cli, prime_number as prime, ARG_ERROR, SUCCESS
 
 runner = CliRunner()
 
@@ -136,9 +136,11 @@ def test_negative_upper_range():
 
 # test negative for both ranges
 def test_negativeboth_range():
-    assert prime.prime_numbers_between(lower_bound=-100, upper_bound=-5) == [
-        2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97
-    ]
+    (prime_range, status_code) = prime.prime_numbers_between(
+        lower_bound=-100, upper_bound=-5
+    )
+    assert prime_range == []
+    assert status_code == ARG_ERROR
 
 
 # integration tests for calling the cli with various arguments ###
