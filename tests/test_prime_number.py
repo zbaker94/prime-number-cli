@@ -122,16 +122,22 @@ def test_zero_upper_range():
 
 # test range [-5, 100] for prime numbers
 def test_negative_lower_range():
-    assert prime.prime_numbers_between(lower_bound=-5, upper_bound=100) == [
+    (prime_range, status_code) = prime.prime_numbers_between(
+        lower_bound=-5, upper_bound=100)
+    assert prime_range == [
         2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97
     ]
+    assert status_code == SUCCESS
 
 
 # test range [100, -5] for prime numbers
 def test_negative_upper_range():
-    assert prime.prime_numbers_between(lower_bound=100, upper_bound=-5) == [
+    (prime_range, status_code) = prime.prime_numbers_between(
+        lower_bound=100, upper_bound=-5)
+    assert prime_range == [
         2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97
     ]
+    assert status_code == SUCCESS
 
 
 # test negative for both ranges
