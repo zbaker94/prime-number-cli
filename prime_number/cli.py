@@ -1,10 +1,9 @@
 """This module provides the prime number cli."""
 # weather/cli.py
 
-from pathlib import Path
 from typing import Optional
 
-from prime_number import __appname__, __version__, prime_number as prime
+from prime_number import __appname__, __version__, prime_number as prime, SUCCESS, ERRORS
 
 from colorama import Fore
 
@@ -12,8 +11,9 @@ import typer
 
 app = typer.Typer()
 
-
 # Callbacks ###
+
+
 def _version_callback(value: bool):
     if value:
         typer.echo(Fore.GREEN + f"{__appname__} version {__version__}")
