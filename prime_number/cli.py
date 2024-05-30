@@ -50,11 +50,9 @@ def lessthan(
 @app.command()
 def prime_generator(
     lower_bound: int = typer.Argument(
-        2,
         help="The lower bound of the range to find prime numbers between.",
     ),
     upper_bound: int = typer.Argument(
-        3,
         help="The upper bound of the range to find prime numbers between.",
     )
 ):
