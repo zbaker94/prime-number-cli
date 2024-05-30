@@ -31,8 +31,6 @@ def sieve_of_eratosthenes(upper_range: int) -> Tuple[list[int], int]:
 # (true is prime, false is not prime)
 def bool_array_to_prime_array(prime_cantidates: list[bool]) -> Tuple[list[int], int]:
     """Coerce an array of booleans to an array of prime numbers."""
-    if (any(num < 0 for num in list)):
-        return ([], ARG_ERROR)
     prime_numbers = []
     # add prime numbers to the list
     for p in range(2, len(prime_cantidates)):
@@ -45,9 +43,14 @@ def bool_array_to_prime_array(prime_cantidates: list[bool]) -> Tuple[list[int], 
 def is_prime(number: int, upper_bound=None) -> Tuple[bool, int]:
     """Check if a number is prime."""
     if number < 2:
-        return False
-    prime_cantidates = sieve_of_eratosthenes(upper_bound or number)
-    prime_numbers = bool_array_to_prime_array(prime_cantidates)
+        return (False, SUCCESS)
+    (prime_cantidates, sieve_status_code) = sieve_of_eratosthenes(
+        upper_bound or number)
+    if (sieve_status_code != SUCCESS):
+        return ([], sieve_status_code)
+    (prime_numbers, convert_status_code) = bool_array_to_prime_array(prime_cantidates)
+    if (convert_status_code != SUCCESS):
+        return ([], convert_status_code)
     if number in prime_numbers:
         return (True, SUCCESS)
     return (False, SUCCESS)
