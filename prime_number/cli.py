@@ -34,7 +34,11 @@ def lessthan(
     typer.echo(
         Fore.YELLOW +
         f"Finding all prime numbers less than or equal to {number}...")
-    prime_numbers = prime.prime_numbers_between(upper_bound=number)
+    (prime_numbers, status_code) = prime.prime_numbers_between(upper_bound=number)
+    if (status_code is not SUCCESS):
+        typer.echo(Fore.RED + ERRORS[status_code])
+        typer.Raise(exit)
+
     typer.echo(
         Fore.LIGHTMAGENTA_EX +
         f"Prime numbers less than or equal to {number}: {Fore.GREEN} {prime_numbers}"
@@ -58,8 +62,11 @@ def prime_generator(
     typer.echo(
         Fore.YELLOW +
         f"Finding all prime numbers between {min(lower_bound, upper_bound)} and {max(upper_bound, lower_bound)}...")
-    prime_numbers = prime.prime_numbers_between(
+    (prime_numbers, status_code) = prime.prime_numbers_between(
         lower_bound=lower_bound, upper_bound=upper_bound)
+    if (status_code is not SUCCESS):
+        typer.echo(Fore.RED + ERRORS[status_code])
+        typer.Raise(exit)
     typer.echo(
         Fore.LIGHTMAGENTA_EX +
         f"Prime numbers between {lower_bound} and {upper_bound}: {Fore.GREEN} {prime_numbers}"
@@ -75,7 +82,11 @@ def is_prime(
     )
 ):
     """Check if a single number is prime."""
-    if prime.is_prime(number):
+    (is_prime, status_code) = prime.is_prime(number)
+    if (status_code is not SUCCESS):
+        typer.echo(Fore.RED + ERRORS[status_code])
+        typer.Raise(exit)
+    if is_prime:
         typer.echo(
             Fore.GREEN +
             f"{number} is a prime number."
@@ -95,7 +106,12 @@ def are_prime(
     )
 ):
     """Check if a list of numbers are prime."""
-    prime_list = prime.is_prime_list(numbers)
+    (prime_list, status_code) = prime.is_prime_list(numbers)
+
+    if (status_code is not SUCCESS):
+        typer.echo(Fore.RED + ERRORS[status_code])
+        typer.Raise(exit)
+
     for item in prime_list:
         for key, value in item.items():
             if value:
