@@ -106,10 +106,10 @@ def are_prime(
 ):
     """Check if a list of numbers are prime."""
     (prime_list, status_code) = prime.is_prime_list(numbers)
-
-    if (status_code is not SUCCESS):
-        typer.echo(Fore.RED + ERRORS[status_code])
-        raise typer.Exit()
+# as of right now, this block of code is unreachable. Keeping it in just in case we need it later
+    if (status_code is not SUCCESS):   # pragma: no cover
+        typer.echo(Fore.RED + ERRORS[status_code])   # pragma: no cover
+        raise typer.Exit()   # pragma: no cover
 
     for item in prime_list:
         for key, value in item.items():

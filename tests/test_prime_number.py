@@ -26,6 +26,14 @@ def test_sieve_of_eratosthenes():
     ]
     assert convert_status == SUCCESS
 
+# test the prime number generator (sieve of eratosthenes) for all
+# numbers between 2 and 1 (invalid)
+
+
+def test_sieve_of_eratosthenes_invalid_arg():
+    (prime_cantidates, sieve_status) = prime.sieve_of_eratosthenes(1)
+    assert sieve_status == ARG_ERROR
+
 
 # test if 7 is prime
 def test_is_prime_7():
