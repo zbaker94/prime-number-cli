@@ -117,6 +117,13 @@ def test_prime_numbers_between_inverted():
     assert status_code == SUCCESS
 
 
+# test prime numbers between with a bound < 2
+def test_prime_numbers_between_invalid_bound():
+    (empty_array, status_code) = prime.prime_numbers_between(1)
+    assert empty_array == []
+    assert status_code == ARG_ERROR
+
+
 # test range where both bounds are the same [7-7] prime number
 def test_prime_numbers_between_same_prime():
     (prime_range, status_code) = prime.prime_numbers_between(
@@ -158,10 +165,8 @@ def test_zero_lower_range():
 def test_zero_upper_range():
     (prime_range, status_code) = prime.prime_numbers_between(
         lower_bound=100, upper_bound=0)
-    assert prime_range == [
-        2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97
-    ]
-    assert status_code == SUCCESS
+    assert prime_range == []
+    assert status_code == ARG_ERROR
 
 
 # test range [-5, 100] for prime numbers
@@ -178,10 +183,8 @@ def test_negative_lower_range():
 def test_negative_upper_range():
     (prime_range, status_code) = prime.prime_numbers_between(
         lower_bound=100, upper_bound=-5)
-    assert prime_range == [
-        2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97
-    ]
-    assert status_code == SUCCESS
+    assert prime_range == []
+    assert status_code == ARG_ERROR
 
 
 # test negative for both ranges
@@ -216,11 +219,25 @@ def test_lessthan():
     assert result.stdout == "Finding all prime numbers less than or equal to 100...\nPrime numbers less than or equal to 100:  [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97]\n"
 
 
+def test_lessthan_invalid():
+    result = runner.invoke(cli.app, ["lessthan", "1"])
+    assert result.exit_code == 0
+    assert result.stdout == "Finding all prime numbers less than or equal to 1...\nArgument Error\n"
+
+
 # test calling the cli with the prime-generator param with a negative bound
 def test_prime_generator_negative_bound():
     result = runner.invoke(cli.app, ["prime-generator", "--", "-2", "100"])
     assert result.exit_code == 0
     assert result.stdout == "Finding all prime numbers between -2 and 100...\nPrime numbers between -2 and 100:  [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97]\n"
+
+# test calling the cli with the prime-generator param with a negative bound
+
+
+def test_prime_generator_invalid_upper_bound():
+    result = runner.invoke(cli.app, ["prime-generator", "2", "1"])
+    assert result.exit_code == 0
+    assert result.stdout == "Finding all prime numbers between 1 and 2...\nArgument Error\n"
 
 
 # test calling the cli with the prime-generator param
@@ -243,9 +260,15 @@ def test_is_prime_false():
     assert result.exit_code == 0
     assert result.stdout == "9 is not a prime number.\n"
 
+
+# test is_prime with invalid bound
+def is_prime_invalid_number():
+    result = runner.invoke(cli.app, ["is-prime", "1"])
+    assert result.exit_code == 0
+    assert result.stdout == "9 is not a prime number.\n"
+
+
 # test calling the cli with the are-prime param with a list of prime numbers
-
-
 def test_are_prime_true():
     result = runner.invoke(cli.app, ["are-prime", "2", "3", "5", "7"])
     assert result.exit_code == 0

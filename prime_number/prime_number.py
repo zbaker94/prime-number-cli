@@ -73,6 +73,8 @@ def is_prime_list(list_of_numbers: list[int]) -> Tuple[list[{int, bool}], int]:
 # numbers (default 2 for lower bound) inclusive
 def prime_numbers_between(upper_bound: int, lower_bound: int = 2) -> Tuple[list[int], int]:
     """Generate a list of prime numbers between two given numbers."""
+    if (upper_bound < 2):
+        return ([], ARG_ERROR)
     if (upper_bound == lower_bound):
         (prime, prime_status_code) = is_prime(upper_bound)
         if (prime_status_code != SUCCESS):

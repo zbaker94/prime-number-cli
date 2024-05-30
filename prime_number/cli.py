@@ -37,7 +37,7 @@ def lessthan(
     (prime_numbers, status_code) = prime.prime_numbers_between(upper_bound=number)
     if (status_code is not SUCCESS):
         typer.echo(Fore.RED + ERRORS[status_code])
-        typer.Raise(exit)
+        raise typer.Exit()
 
     typer.echo(
         Fore.LIGHTMAGENTA_EX +
@@ -64,7 +64,7 @@ def prime_generator(
         lower_bound=lower_bound, upper_bound=upper_bound)
     if (status_code is not SUCCESS):
         typer.echo(Fore.RED + ERRORS[status_code])
-        typer.Raise(exit)
+        raise typer.Exit()
     typer.echo(
         Fore.LIGHTMAGENTA_EX +
         f"Prime numbers between {lower_bound} and {upper_bound}: {Fore.GREEN} {prime_numbers}"
@@ -81,9 +81,10 @@ def is_prime(
 ):
     """Check if a single number is prime."""
     (is_prime, status_code) = prime.is_prime(number)
-    if (status_code is not SUCCESS):
-        typer.echo(Fore.RED + ERRORS[status_code])
-        typer.Raise(exit)
+    # as of right now, this block of code is unreachable. Keeping it in just in case we need it later
+    if (status_code is not SUCCESS):  # pragma: no cover
+        typer.echo(Fore.RED + ERRORS[status_code])  # pragma: no cover
+        raise typer.Exit()  # pragma: no cover
     if is_prime:
         typer.echo(
             Fore.GREEN +
@@ -108,7 +109,7 @@ def are_prime(
 
     if (status_code is not SUCCESS):
         typer.echo(Fore.RED + ERRORS[status_code])
-        typer.Raise(exit)
+        raise typer.Exit()
 
     for item in prime_list:
         for key, value in item.items():
