@@ -96,14 +96,21 @@ def test_prime_numbers_between_same_prime():
 
 # test range where both bounds are the same [4-4] non-prime number
 def test_prime_numbers_between_same_not_prime():
-    assert prime.prime_numbers_between(lower_bound=4, upper_bound=4) == []
+    (prime_range, status_code) = prime.prime_numbers_between(
+        lower_bound=4, upper_bound=4)
+    assert prime_range == []
+    assert status_code == SUCCESS
 
 
 # test range [7900-7920] for prime numbers
 def test_prime_numbers_between_7900_7920():
-    assert prime.prime_numbers_between(lower_bound=7900, upper_bound=7920) == [
+    (prime_range, status_code) = prime.prime_numbers_between(
+        lower_bound=7900, upper_bound=7920)
+    assert prime_range == [
         7901, 7907, 7919
     ]
+
+    assert status_code == SUCCESS
 
 
 # test range [0, 100] for prime numbers
