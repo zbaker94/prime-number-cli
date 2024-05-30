@@ -106,8 +106,45 @@ def test_prime_numbers_between_7900_7920():
     ]
 
 
+# test range [0, 100] for prime numbers
+def test_zero_lower_range():
+    assert prime.prime_numbers_between(lower_bound=0, upper_bound=100) == [
+        2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97
+    ]
+
+
+# test range [100, 0] for prime numbers
+def test_zero_upper_range():
+    assert prime.prime_numbers_between(lower_bound=100, upper_bound=0) == [
+        2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97
+    ]
+
+
+# test range [-5, 100] for prime numbers
+def test_negative_lower_range():
+    assert prime.prime_numbers_between(lower_bound=-5, upper_bound=100) == [
+        2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97
+    ]
+
+
+# test range [100, -5] for prime numbers
+def test_negative_upper_range():
+    assert prime.prime_numbers_between(lower_bound=100, upper_bound=-5) == [
+        2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97
+    ]
+
+
+# test negative for both ranges
+def test_negativeboth_range():
+    assert prime.prime_numbers_between(lower_bound=-100, upper_bound=-5) == [
+        2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97
+    ]
+
+
 # integration tests for calling the cli with various arguments ###
 # test calling the cli with no arguments
+
+
 def test_no_args():
     result = runner.invoke(cli.app, [])
     assert result.exit_code == 2
