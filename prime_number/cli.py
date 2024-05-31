@@ -1,10 +1,9 @@
 """This module provides the prime number cli."""
 # weather/cli.py
 
-from pathlib import Path
 from typing import Optional
 
-from prime_number import __appname__, __version__, prime_number as prime
+from prime_number import __appname__, __version__, prime_number as prime, SUCCESS, ERRORS
 
 from colorama import Fore
 
@@ -12,8 +11,9 @@ import typer
 
 app = typer.Typer()
 
-
 # Callbacks ###
+
+
 def _version_callback(value: bool):
     if value:
         typer.echo(Fore.GREEN + f"{__appname__} version {__version__}")
@@ -34,7 +34,11 @@ def lessthan(
     typer.echo(
         Fore.YELLOW +
         f"Finding all prime numbers less than or equal to {number}...")
-    prime_numbers = prime.prime_numbers_between(upper_bound=number)
+    (prime_numbers, status_code) = prime.prime_numbers_between(upper_bound=number)
+    if (status_code is not SUCCESS):
+        typer.echo(Fore.RED + ERRORS[status_code])
+        raise typer.Exit()
+
     typer.echo(
         Fore.LIGHTMAGENTA_EX +
         f"Prime numbers less than or equal to {number}: {Fore.GREEN} {prime_numbers}"
@@ -46,11 +50,9 @@ def lessthan(
 @app.command()
 def prime_generator(
     lower_bound: int = typer.Argument(
-        2,
         help="The lower bound of the range to find prime numbers between.",
     ),
     upper_bound: int = typer.Argument(
-        3,
         help="The upper bound of the range to find prime numbers between.",
     )
 ):
@@ -58,8 +60,11 @@ def prime_generator(
     typer.echo(
         Fore.YELLOW +
         f"Finding all prime numbers between {min(lower_bound, upper_bound)} and {max(upper_bound, lower_bound)}...")
-    prime_numbers = prime.prime_numbers_between(
+    (prime_numbers, status_code) = prime.prime_numbers_between(
         lower_bound=lower_bound, upper_bound=upper_bound)
+    if (status_code is not SUCCESS):
+        typer.echo(Fore.RED + ERRORS[status_code])
+        raise typer.Exit()
     typer.echo(
         Fore.LIGHTMAGENTA_EX +
         f"Prime numbers between {lower_bound} and {upper_bound}: {Fore.GREEN} {prime_numbers}"
@@ -75,7 +80,12 @@ def is_prime(
     )
 ):
     """Check if a single number is prime."""
-    if prime.is_prime(number):
+    (is_prime, status_code) = prime.is_prime(number)
+    # as of right now, this block of code is unreachable. Keeping it in just in case we need it later
+    if (status_code is not SUCCESS):  # pragma: no cover
+        typer.echo(Fore.RED + ERRORS[status_code])  # pragma: no cover
+        raise typer.Exit()  # pragma: no cover
+    if is_prime:
         typer.echo(
             Fore.GREEN +
             f"{number} is a prime number."
@@ -95,7 +105,12 @@ def are_prime(
     )
 ):
     """Check if a list of numbers are prime."""
-    prime_list = prime.is_prime_list(numbers)
+    (prime_list, status_code) = prime.is_prime_list(numbers)
+# as of right now, this block of code is unreachable. Keeping it in just in case we need it later
+    if (status_code is not SUCCESS):   # pragma: no cover
+        typer.echo(Fore.RED + ERRORS[status_code])   # pragma: no cover
+        raise typer.Exit()   # pragma: no cover
+
     for item in prime_list:
         for key, value in item.items():
             if value:

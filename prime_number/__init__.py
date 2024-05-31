@@ -4,7 +4,7 @@ __version__ = "0.1.0"
 (
     SUCCESS,
     ARG_ERROR,
-    DIR_READ_ERROR, 
+    DIR_READ_ERROR,
     FILE_READ_ERROR,
     DIR_CREATE_ERROR,
     FILE_WRITE_ERROR,
